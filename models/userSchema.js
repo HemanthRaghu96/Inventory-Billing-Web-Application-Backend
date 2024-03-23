@@ -9,7 +9,7 @@ const keysecret = process.env.SECRET_KEY;
 
 // Mongoose UserSchema
 const userSchema = new mongoose.Schema({
-  fname: {
+  username: {
     type: String,
     required: true,
     trim: true,

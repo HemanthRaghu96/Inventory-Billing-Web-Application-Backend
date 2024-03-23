@@ -22,9 +22,9 @@ const transporter = nodemailer.createTransport({
 // User Registeration
 
 async function userRegisteration(req, res) {
-  const { fname, email, password, cpassword } = req.body;
+  const { username, email, password, cpassword } = req.body;
   console.log(req.body);
-  if (!fname || !email || !password || !cpassword) {
+  if (!username || !email || !password || !cpassword) {
     res.status(422).json({ error: "fill all the details" });
   }
 
@@ -39,7 +39,7 @@ async function userRegisteration(req, res) {
         .json({ error: "Password and Confirm Password Not Match" });
     } else {
       const finalUser = new userdb({
-        fname,
+        username,
         email,
         password,
         cpassword,
