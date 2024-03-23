@@ -89,7 +89,7 @@ async function userLogin(req, res) {
           userValid,
           token,
         };
-        res.status(201).json({ status: 201, result });
+        res.status(201).send({ status: 201, result });
       }
     } else {
       res.status(401).json({ status: 401, message: "invalid details" });
