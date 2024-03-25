@@ -82,6 +82,17 @@ async function getAllItem(req, res) {
   }
 }
 
+async function getSelectedItem(req, res) {
+  const itemId = req.params.itemid;
+  try {
+    const selectedItems = await Item.find({_id:itemId});
+    res.status(201).json({ status: 201, selectedItems });
+  } catch (error) {
+    res.status(422).json(error);
+    console.log("catch block error");
+  }
+}
+
 async function editItems(req, res) {
   const itemId = req.params.itemid;
   console.log(itemId)
@@ -165,4 +176,5 @@ module.exports = {
   getAllItem,
   editItems,
   deleteItems,
+  getSelectedItem
 };
