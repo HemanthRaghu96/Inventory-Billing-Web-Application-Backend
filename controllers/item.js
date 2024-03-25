@@ -82,7 +82,87 @@ async function getAllItem(req, res) {
   }
 }
 
+async function editItems(req, res) {
+  const itemId = req.params.itemid;
+  console.log(itemId)
+  const {
+    name,
+    sku,
+    unit,
+    poster,
+    dimensions,
+    manufacturer,
+    upc,
+    ean,
+    weight,
+    brand,
+    mpn,
+    isbn,
+    sellingprice,
+    salesaccount,
+    salesdescription,
+    costprice,
+    purchaseaccount,
+    purchasedescription,
+  } = req.body;
+
+  try {
+    const updatedItem = await Item.findByIdAndUpdate(
+      itemId,
+      {
+        $set: {
+          name,
+          sku,
+          unit,
+          poster,
+          dimensions,
+          manufacturer,
+          upc,
+          ean,
+          weight,
+          brand,
+          mpn,
+          isbn,
+          sellingprice,
+          salesaccount,
+          salesdescription,
+          costprice,
+          purchaseaccount,
+          purchasedescription,
+        },
+      },
+      { new: true }
+    );
+
+    if (!updatedItem) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+
+    res.status(200).json({ status: 200, updatedItem });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+async function deleteItems(req, res) {
+  const itemId = req.params.itemid;
+
+  try {
+    const deletedItem = await Item.findByIdAndDelete(itemId);
+
+    if (!deletedItem) {
+      return res.status(404).json({ error: "Item not found" });
+    }
+
+    res.status(200).json({ status: 200, deletedItem });
+  } catch (error) {
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
 module.exports = {
   addItem,
   getAllItem,
+  editItems,
+  deleteItems,
 };
