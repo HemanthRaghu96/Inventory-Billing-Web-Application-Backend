@@ -9,6 +9,8 @@ const userRouter = require("./routes/user");
 const itemRouter = require("./routes/item");
 const customerRouter = require("./routes/customer");
 const vendorRouter = require("./routes/vendor");
+const salesorderRouter = require("./routes/salesorder");
+const purchaseorderRouter = require("./routes/purchaseorder");
 
 const app = express();
 const port = process.env.PORT;
@@ -38,6 +40,8 @@ app.use("/", userRouter);
 app.use("/", itemRouter);
 app.use("/", customerRouter);
 app.use("/", vendorRouter);
+app.use("/", salesorderRouter);
+app.use("/", purchaseorderRouter);
 
 // Define a route for the root URL
 
