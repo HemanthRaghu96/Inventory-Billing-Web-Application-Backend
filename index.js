@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
 const itemRouter = require("./routes/item");
 const customerRouter = require("./routes/customer");
+const vendorRouter = require("./routes/vendor");
 
 const app = express();
 const port = process.env.PORT;
@@ -36,6 +37,7 @@ app.use(cors());
 app.use("/", userRouter);
 app.use("/", itemRouter);
 app.use("/", customerRouter);
+app.use("/", vendorRouter);
 
 // Define a route for the root URL
 
