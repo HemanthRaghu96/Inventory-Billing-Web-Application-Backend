@@ -2,69 +2,71 @@
 
 const mongoose = require("mongoose");
 
-// Mongoose itemSchema
-const itemSchema = new mongoose.Schema({
-  name: {
+// Mongoose customerSchema
+const customerSchema = new mongoose.Schema({
+  firstname: {
     type: String,
     required: true,
   },
-  sku: {
-    type: String,
-  },
-  unit: {
+  lastname: {
     type: String,
     required: true,
   },
-  poster: {
+  displayname: {
     type: String,
+    required: true,
   },
-  dimensions: {
+  companyname: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  phonenumber: {
+    type: String,
+    required: true,
+  },
+  pan: {
+    type: String,
+    required: true,
+  },
+  billingaddress: {
     type: Object,
   },
-  manufacturer: {
+  billingcountry: {
     type: String,
   },
-  upc: {
+  billingcity: {
     type: String,
   },
-  ean: {
+  billingstate: {
     type: String,
   },
-  weight: {
-    type: Object,
-  },
-  brand: {
-    type: String,
-  },
-  mpn: {
-    type: String,
-  },
-  isbn: {
-    type: String,
-  },
-  sellingprice: {
+  billingpincode: {
     type: String,
     required: true,
   },
-  salesaccount: {
+  shippingaddress: {
     type: String,
     required: true,
   },
-  salesdescription: {
+  shippingcountry: {
     type: String,
   },
-  costprice: {
-    type: String,
-    required: true,
-  },
-  purchaseaccount: {
+  shippingcity: {
     type: String,
     required: true,
   },
-  purchasedescription: {
+  shippingstate: {
+    type: String,
+    required: true,
+  },
+  shippingpincode: {
     type: String,
   },
 });
 
-const Item  = new mongoose.model("Item ", itemSchema);
-module.exports = Item ;
+const Customer = new mongoose.model("Customer", customerSchema);
+module.exports = Customer;

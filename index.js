@@ -7,6 +7,7 @@ const cookiParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const userRouter = require("./routes/user");
 const itemRouter = require("./routes/item");
+const customerRouter = require("./routes/customer");
 
 const app = express();
 const port = process.env.PORT;
@@ -34,6 +35,7 @@ app.use(cookiParser());
 app.use(cors());
 app.use("/", userRouter);
 app.use("/", itemRouter);
+app.use("/", customerRouter);
 
 // Define a route for the root URL
 
