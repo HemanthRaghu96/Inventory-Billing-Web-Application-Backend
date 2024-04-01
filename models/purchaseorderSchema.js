@@ -19,6 +19,9 @@ const purchaseorderSchema = new mongoose.Schema({
   shipmentdate: {
     type: String,
   },
+  totalamount: {
+    type: Number,
+  },
   items: {
     type: JSON,
     required: true,

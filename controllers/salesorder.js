@@ -8,6 +8,7 @@ async function addSalesorder(req, res) {
     salesorder,
     date,
     shipmentdate,
+    totalamount,
     items,
     shipmentingcharges,
     customernote,
@@ -27,13 +28,13 @@ async function addSalesorder(req, res) {
         salesorder,
         date,
         shipmentdate,
+        totalamount,
         items,
         shipmentingcharges,
         customernote,
       });
 
       const savedSalesorder = await newSalesorder.save();
-      res.setHeader('Content-Type', 'application/json');
       res.status(201).json({ status: 201, savedSalesorder });
     }
   } catch (error) {
@@ -73,6 +74,7 @@ async function editSalesorders(req, res) {
     salesorder,
     date,
     shipmentdate,
+    totalamount,
     items,
     shipmentingcharges,
     customernote,
@@ -87,6 +89,7 @@ async function editSalesorders(req, res) {
             salesorder,
             date,
             shipmentdate,
+            totalamount,
             items,
             shipmentingcharges,
             customernote,

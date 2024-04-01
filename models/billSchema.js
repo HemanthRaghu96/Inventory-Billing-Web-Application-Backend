@@ -23,6 +23,13 @@ const billSchema = new mongoose.Schema({
   duedate: {
     type: String,
   },
+  payment: {
+    type: String,
+    default:"UNPAID",
+  },
+  totalamount: {
+    type: Number,
+  },
   items: {
     type: JSON,
     required: true,
