@@ -33,6 +33,7 @@ async function addSalesorder(req, res) {
       });
 
       const savedSalesorder = await newSalesorder.save();
+      res.setHeader('Content-Type', 'application/json');
       res.status(201).json({ status: 201, savedSalesorder });
     }
   } catch (error) {
