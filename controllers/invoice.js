@@ -20,7 +20,7 @@ async function addInvoice(req, res) {
     res.status(422).json({ error: "fill all the details" });
   }
   try {
-    const preinvoice = await Invoice.findOne({ invoice: invoice });
+    const preinvoice = await Invoice.findOne({ ordernumber: ordernumber });
 
     if (preinvoice) {
       res.status(422).json({ error: "This invoice is Already Exist" });

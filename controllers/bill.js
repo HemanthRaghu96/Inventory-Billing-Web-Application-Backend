@@ -16,11 +16,11 @@ async function addBill(req, res) {
     termsconditions,
   } = req.body;
   console.log(req.body);
-  if (!vendorname || !billdate || !bill) {
+  if (!ordernumber || !billdate || !bill) {
     res.status(422).json({ error: "fill all the details" });
   }
   try {
-    const prebill = await Bill.findOne({ vendorname: vendorname });
+    const prebill = await Bill.findOne({ ordernumber: ordernumber });
 
     if (prebill) {
       res.status(422).json({ error: "This bill is Already Exist" });
