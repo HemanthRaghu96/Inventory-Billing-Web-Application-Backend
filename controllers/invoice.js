@@ -16,11 +16,11 @@ async function addInvoice(req, res) {
     termsconditions,
   } = req.body;
   console.log(req.body);
-  if (!customername || !invoicedate || !invoice) {
+  if (!ordernumber || !invoicedate || !invoice) {
     res.status(422).json({ error: "fill all the details" });
   }
   try {
-    const preinvoice = await Invoice.findOne({ customername: customername });
+    const preinvoice = await Invoice.findOne({ invoice: invoice });
 
     if (preinvoice) {
       res.status(422).json({ error: "This invoice is Already Exist" });

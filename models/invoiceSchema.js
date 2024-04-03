@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const invoiceSchema = new mongoose.Schema({
   customername: {
     type: String,
-    required: true,
+  
   },
   invoice: {
     type: String,
