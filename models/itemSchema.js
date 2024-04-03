@@ -12,7 +12,7 @@ const itemSchema = new mongoose.Schema({
     type: String,
   },
   unit: {
-    type: String,
+    type: Number,
     required: true,
   },
   poster: {
