@@ -16,14 +16,14 @@ async function addInvoice(req, res) {
     termsconditions,
   } = req.body;
   console.log(req.body);
-  if (!ordernumber || !invoicedate || !invoice) {
-    res.status(422).json({ error: "fill all the details" });
+  if (!ordernumber || !invoicedate || !invoice || !payment) {
+    return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const preinvoice = await Invoice.findOne({ ordernumber: ordernumber });
 
     if (preinvoice) {
-      res.status(422).json({ error: "This invoice is Already Exist" });
+      return res.status(422).json({ error: "This invoice is Already Exist" });
     } else {
       const newInvoice = new Invoice({
         customername,
@@ -39,11 +39,12 @@ async function addInvoice(req, res) {
       });
 
       const savedInvoice = await newInvoice.save();
-      res.status(201).json({ status: 201, savedInvoice });
+      return res.status(201).json({ status: 201, savedInvoice });
     }
   } catch (error) {
-    res.status(422).json(error);
     console.log("catch block error", error);
+    return res.status(422).json(error);
+   
   }
 }
 

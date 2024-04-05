@@ -15,13 +15,13 @@ async function addSalesorder(req, res) {
   } = req.body;
   console.log(req.body);
   if (!customername || !salesorder || !date || !items) {
-    res.status(422).json({ error: "fill all the details" });
+    return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const presalesorder = await SalesOrder.findOne({ customername: customername });
 
     if (presalesorder) {
-      res.status(422).json({ error: "This salesorder is Already Exist" });
+      return res.status(422).json({ error: "This salesorder is Already Exist" });
     } else {
       const newSalesorder = new SalesOrder({
         customername,
@@ -35,11 +35,12 @@ async function addSalesorder(req, res) {
       });
 
       const savedSalesorder = await newSalesorder.save();
-      res.status(201).json({ status: 201, savedSalesorder });
+      return res.status(201).json({ status: 201, savedSalesorder });
     }
   } catch (error) {
-    res.status(422).json(error);
     console.log("catch block error",error);
+    return res.status(422).json(error);
+   
   }
 }
 

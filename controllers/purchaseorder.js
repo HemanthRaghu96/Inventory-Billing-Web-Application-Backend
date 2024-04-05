@@ -15,13 +15,13 @@ async function addPurchaseorder(req, res) {
   } = req.body;
   console.log(req.body);
   if (!vendorname || !purchaseorder || !date || !items) {
-    res.status(422).json({ error: "fill all the details" });
+    return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const prepurchaseorder = await PurchaseOrder.findOne({ vendorname: vendorname });
 
     if (prepurchaseorder) {
-      res.status(422).json({ error: "This purchaseorder is Already Exist" });
+      return res.status(422).json({ error: "This purchaseorder is Already Exist" });
     } else {
       const newPurchaseorder = new PurchaseOrder({
         vendorname,
@@ -35,11 +35,12 @@ async function addPurchaseorder(req, res) {
       });
 
       const savedPurchaseorder = await newPurchaseorder.save();
-      res.status(201).json({ status: 201, savedPurchaseorder });
+      return res.status(201).json({ status: 201, savedPurchaseorder });
     }
   } catch (error) {
-    res.status(422).json(error);
     console.log("catch block error",error);
+    return res.status(422).json(error);
+   
   }
 }
 

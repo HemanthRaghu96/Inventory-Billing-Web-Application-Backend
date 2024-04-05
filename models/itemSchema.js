@@ -19,7 +19,7 @@ const itemSchema = new mongoose.Schema({
     type: String,
   },
   dimensions: {
-    type: Object,
+    type: String,
   },
   manufacturer: {
     type: String,
@@ -31,7 +31,7 @@ const itemSchema = new mongoose.Schema({
     type: String,
   },
   weight: {
-    type: Object,
+    type: String,
   },
   brand: {
     type: String,
@@ -48,7 +48,6 @@ const itemSchema = new mongoose.Schema({
   },
   salesaccount: {
     type: String,
-    required: true,
   },
   salesdescription: {
     type: String,
@@ -59,7 +58,6 @@ const itemSchema = new mongoose.Schema({
   },
   purchaseaccount: {
     type: String,
-    required: true,
   },
   purchasedescription: {
     type: String,

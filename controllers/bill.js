@@ -16,14 +16,14 @@ async function addBill(req, res) {
     termsconditions,
   } = req.body;
   console.log(req.body);
-  if (!ordernumber || !billdate || !bill) {
-    res.status(422).json({ error: "fill all the details" });
+  if (!ordernumber || !billdate || !bill || !payment) {
+    return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const prebill = await Bill.findOne({ ordernumber: ordernumber });
 
     if (prebill) {
-      res.status(422).json({ error: "This bill is Already Exist" });
+      return res.status(422).json({ error: "This bill is Already Exist" });
     } else {
       const newBill = new Bill({
         vendorname,
@@ -39,11 +39,12 @@ async function addBill(req, res) {
       });
 
       const savedBill = await newBill.save();
-      res.status(201).json({ status: 201, savedBill });
+      return res.status(201).json({ status: 201, savedBill });
     }
   } catch (error) {
-    res.status(422).json(error);
     console.log("catch block error", error);
+    return res.status(422).json(error);
+   
   }
 }
 
@@ -52,10 +53,11 @@ async function addBill(req, res) {
 async function getAllBill(req, res) {
   try {
     const allBills = await Bill.find();
-    res.status(201).json({ status: 201, allBills });
+      res.status(201).json({ status: 201, allBills });
   } catch (error) {
-    res.status(422).json(error);
     console.log("catch block error");
+     res.status(422).json(error);
+   
   }
 }
 
@@ -63,10 +65,11 @@ async function getSelectedBill(req, res) {
   const billId = req.params.billid;
   try {
     const selectedBills = await Bill.find({ _id: billId });
-    res.status(201).json({ status: 201, selectedBills });
+     res.status(201).json({ status: 201, selectedBills });
   } catch (error) {
-    res.status(422).json(error);
     console.log("catch block error");
+     res.status(422).json(error);
+   
   }
 }
 
@@ -112,7 +115,7 @@ async function editBills(req, res) {
 
     res.status(200).json({ status: 200, updatedBill });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+      res.status(500).json({ error: "Internal server error" });
   }
 }
 

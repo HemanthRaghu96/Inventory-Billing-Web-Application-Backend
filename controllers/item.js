@@ -24,21 +24,14 @@ async function addItem(req, res) {
     purchasedescription,
   } = req.body;
   console.log(req.body);
-  if (
-    !name ||
-    !unit ||
-    !sellingprice ||
-    !salesaccount ||
-    !costprice ||
-    !purchaseaccount
-  ) {
-    res.status(422).json({ error: "fill all the details" });
+  if (!name || !unit || !sellingprice || !costprice) {
+   return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const preitem = await Item.findOne({ name: name });
 
     if (preitem) {
-      res.status(422).json({ error: "This item is Already Exist" });
+     return res.status(422).json({ error: "This item is Already Exist" });
     } else {
       const newItem = new Item({
         name,
@@ -62,11 +55,11 @@ async function addItem(req, res) {
       });
 
       const savedItem = await newItem.save();
-      res.status(201).json({ status: 201, savedItem });
+      return res.status(201).json({ status: 201, savedItem });
     }
   } catch (error) {
-    res.status(422).json(error);
-    console.log("catch block error");
+    console.log("catch block error", error.message);
+    return res.status(500).json({error: "Internal server error" });
   }
 }
 
@@ -85,7 +78,7 @@ async function getAllItem(req, res) {
 async function getSelectedItem(req, res) {
   const itemId = req.params.itemid;
   try {
-    const selectedItems = await Item.find({_id:itemId});
+    const selectedItems = await Item.find({ _id: itemId });
     res.status(201).json({ status: 201, selectedItems });
   } catch (error) {
     res.status(422).json(error);
@@ -95,7 +88,7 @@ async function getSelectedItem(req, res) {
 
 async function editItems(req, res) {
   const itemId = req.params.itemid;
-  console.log(itemId)
+  console.log(itemId);
   const {
     name,
     sku,
@@ -176,5 +169,5 @@ module.exports = {
   getAllItem,
   editItems,
   deleteItems,
-  getSelectedItem
+  getSelectedItem,
 };

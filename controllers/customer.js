@@ -32,13 +32,13 @@ async function addCustomer(req, res) {
     !phonenumber ||
     !pan
   ) {
-    res.status(422).json({ error: "fill all the details" });
+   return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const preCustomer = await Customer.findOne({ displayname: displayname });
 
     if (preCustomer) {
-      res.status(422).json({ error: "This Customer is Already Exist" });
+      return res.status(422).json({ error: "This Customer is Already Exist" });
     } else {
       const newCustomer = new Customer({
         firstname,
@@ -61,11 +61,12 @@ async function addCustomer(req, res) {
       });
 
       const savedCustomer = await newCustomer.save();
-      res.status(201).json({ status: 201, savedCustomer });
+      return res.status(201).json({ status: 201, savedCustomer });
     }
   } catch (error) {
-    res.status(422).json(error);
     console.log("Error", error);
+    return  res.status(500).json(error);
+  
   }
 }
 
@@ -74,7 +75,7 @@ async function addCustomer(req, res) {
 async function getAllCustomer(req, res) {
   try {
     const allCustomer = await Customer.find();
-    res.status(201).json({ status: 201, allCustomer });
+       res.status(201).json({ status: 201, allCustomer });
   } catch (error) {
     res.status(422).json(error);
     console.log("Error", error);

@@ -32,13 +32,13 @@ async function addVendor(req, res) {
     !phonenumber ||
     !pan
   ) {
-    res.status(422).json({ error: "fill all the details" });
+    return res.status(422).json({ error: "fill all the details" });
   }
   try {
     const preVendor = await Vendor.findOne({ displayname: displayname });
 
     if (preVendor) {
-      res.status(422).json({ error: "This Vendor is Already Exist" });
+      return res.status(422).json({ error: "This Vendor is Already Exist" });
     } else {
       const newVendor = new Vendor({
         firstname,
@@ -61,11 +61,12 @@ async function addVendor(req, res) {
       });
 
       const savedVendor = await newVendor.save();
-      res.status(201).json({ status: 201, savedVendor });
+      return res.status(201).json({ status: 201, savedVendor });
     }
   } catch (error) {
-    res.status(422).json(error);
     console.log("Error", error);
+    return res.status(422).json(error);
+   
   }
 }
 
