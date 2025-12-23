@@ -17,7 +17,7 @@ async function addPurchaseorder(req, res) {
     return res.status(422).json({ error: "fill all the details" });
   }
   try {
-    const prepurchaseorder = await PurchaseOrder.findOne({ vendorname: vendorname });
+    const prepurchaseorder = await PurchaseOrder.findOne({ purchaseorder });
 
     if (prepurchaseorder) {
       return res.status(422).json({ error: "This purchaseorder is Already Exist" });
