@@ -11,7 +11,6 @@ async function addSalesorder(req, res) {
     totalamount,
     items,
     shipmentingcharges,
-    customernote,
   } = req.body;
   console.log(req.body);
   if (!customername || !salesorder || !date || !items) {
@@ -31,7 +30,6 @@ async function addSalesorder(req, res) {
         totalamount,
         items,
         shipmentingcharges,
-        customernote,
       });
 
       const savedSalesorder = await newSalesorder.save();
@@ -78,7 +76,6 @@ async function editSalesorders(req, res) {
     totalamount,
     items,
     shipmentingcharges,
-    customernote,
   } = req.body;
 
   try {
@@ -93,7 +90,6 @@ async function editSalesorders(req, res) {
             totalamount,
             items,
             shipmentingcharges,
-            customernote,
         },
       },
       { new: true }

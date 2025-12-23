@@ -11,7 +11,6 @@ async function addPurchaseorder(req, res) {
     totalamount,
     items,
     shipmentingcharges,
-    customernote,
   } = req.body;
   console.log(req.body);
   if (!vendorname || !purchaseorder || !date || !items) {
@@ -31,7 +30,6 @@ async function addPurchaseorder(req, res) {
         totalamount,
         items,
         shipmentingcharges,
-        customernote,
       });
 
       const savedPurchaseorder = await newPurchaseorder.save();
@@ -78,7 +76,6 @@ async function editPurchaseorders(req, res) {
     totalamount,
     items,
     shipmentingcharges,
-    customernote,
   } = req.body;
 
   try {
@@ -93,7 +90,6 @@ async function editPurchaseorders(req, res) {
             totalamount,
             items,
             shipmentingcharges,
-            customernote,
         },
       },
       { new: true }
