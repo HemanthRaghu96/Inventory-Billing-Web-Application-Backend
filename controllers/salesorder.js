@@ -17,7 +17,7 @@ async function addSalesorder(req, res) {
     return res.status(422).json({ error: "fill all the details" });
   }
   try {
-    const presalesorder = await SalesOrder.findOne({ customername: customername });
+    const presalesorder = await SalesOrder.findOne({ salesorder });
 
     if (presalesorder) {
       return res.status(422).json({ error: "This salesorder is Already Exist" });
